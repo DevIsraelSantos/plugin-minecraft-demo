@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ACTION="$1"
+
 if [ ! -s .env ]; then
     echo "ERRO: arquivo .env não existe ou está vazio"
     exit 1
@@ -43,12 +45,18 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo
-echo "========================================"
-echo " INICIANDO SERVIDOR"
-echo "========================================"
-echo
 
-cd "$SERVER_DIR" || exit 1
+if [ "$ACTION" = "start" ]; then
+    echo
+    echo "========================================"
+    echo " INICIANDO SERVIDOR"
+    echo "========================================"
+    echo
 
-java -jar "$SERVER_JAR" nogui
+    cd "$SERVER_DIR" || exit 1
+
+    java -jar "$SERVER_JAR" nogui
+else
+    echo "Skip start server"
+fi
+
