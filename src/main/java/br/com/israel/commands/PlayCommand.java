@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 
 import br.com.israel.PluginMinecraftDemo;
 import br.com.israel.models.ChoiceType;
@@ -54,6 +55,12 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
             String[] args) {
 
         try {
+            if (!(sender instanceof Player player)) {
+                sender.sendMessage(
+                        Component.text("Este comando só pode ser usado por jogadores."));
+                return true;
+            }
+
             validate(args);
 
             ChoiceType choice = parseChoice(args[0]);
@@ -67,6 +74,12 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
                     plugin
                             .getMessageService()
                             .getParOuImparMessage(result));
+
+            if (result.won()) {
+                plugin.getEffectService().playWinEffect(player);
+            } else {
+                plugin.getEffectService().playLoseEffect(player);
+            }
 
         } catch (IllegalArgumentException exception) {
             sender.sendMessage(

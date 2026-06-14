@@ -5,12 +5,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 import br.com.israel.commands.PingCommand;
 import br.com.israel.commands.PlayCommand;
 import br.com.israel.listeners.PlayerJoinListener;
+import br.com.israel.services.EffectService;
 import br.com.israel.services.MessageService;
 import br.com.israel.services.ParOuImparService;
 
 public class PluginMinecraftDemo extends JavaPlugin {
     private MessageService messageService;
     private ParOuImparService parOuImparService;
+    private EffectService effectService;
 
     @Override
     public void onEnable() {
@@ -26,6 +28,7 @@ public class PluginMinecraftDemo extends JavaPlugin {
     private void registerServices() {
         this.messageService = new MessageService(getConfig());
         this.parOuImparService = new ParOuImparService();
+        this.effectService = new EffectService(getConfig(), this);
     }
 
     private void registerCommands() {
@@ -48,6 +51,10 @@ public class PluginMinecraftDemo extends JavaPlugin {
 
     public ParOuImparService getParOuImparService() {
         return this.parOuImparService;
+    }
+
+    public EffectService getEffectService() {
+        return this.effectService;
     }
 
 }
