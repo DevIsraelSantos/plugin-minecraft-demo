@@ -6,18 +6,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import br.com.israel.commands.PingCommand;
 import br.com.israel.listeners.PlayerJoinListener;
-import net.md_5.bungee.api.ChatColor;
 
 public class PluginMinecraftDemo extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
 
-        getLogger().info(ChatColor.YELLOW + " Plugin iniciado!");
+        getLogger().info("Plugin iniciado! - ");
 
-        getCommand("ping").setExecutor(new PingCommand());
+        getCommand("ping").setExecutor(new PingCommand(this));
 
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
     }
 
     @Override
