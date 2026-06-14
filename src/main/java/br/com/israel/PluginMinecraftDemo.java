@@ -4,11 +4,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class PluginMinecraftDemo extends JavaPlugin {
+import br.com.israel.commands.PingCommand;
+import net.md_5.bungee.api.ChatColor;
 
+public class PluginMinecraftDemo extends JavaPlugin {
+    
     @Override
     public void onEnable() {
-        getLogger().info("Plugin iniciado!");
+        getLogger().info(ChatColor.YELLOW + " Plugin iniciado!");
+
+        getCommand("ping").setExecutor(new PingCommand());
     }
 
     @Override
