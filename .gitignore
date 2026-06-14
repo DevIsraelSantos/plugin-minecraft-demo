@@ -1,0 +1,44 @@
+# Gradle
+.gradle/
+build/
+
+# IntelliJ
+.idea/
+*.iml
+out/
+
+# VS Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# NetBeans
+nbproject/
+
+# Java
+*.class
+hs_err_pid*
+replay_pid*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Minecraft server local (se estiver na mesma pasta)
+server/
+plugins/
+world/
+world_nether/
+world_the_end/
+
+# Arquivos temporários
+*.tmp
+
+.env*

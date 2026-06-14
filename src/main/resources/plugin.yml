@@ -1,0 +1,9 @@
+name: PluginMinecraftDemo
+version: 1.0.0
+main: br.com.israel.PluginMinecraftDemo
+api-version: "1.21.1"
+author: Israel
+
+commands:
+  ping:
+    description: Teste do plugin
