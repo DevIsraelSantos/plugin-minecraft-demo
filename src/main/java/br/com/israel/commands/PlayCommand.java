@@ -1,20 +1,49 @@
 package br.com.israel.commands;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 
 import br.com.israel.PluginMinecraftDemo;
 import br.com.israel.models.ChoiceType;
 import br.com.israel.models.ParOuImparResult;
 import net.kyori.adventure.text.Component;
 
-public class PlayCommand implements CommandExecutor {
+public class PlayCommand implements CommandExecutor, TabCompleter {
 
     private final PluginMinecraftDemo plugin;
 
+    public static void register(PluginMinecraftDemo plugin) {
+        PlayCommand command = new PlayCommand(plugin);
+
+        plugin.getCommand("play").setExecutor(command);
+        plugin.getCommand("play").setTabCompleter(command);
+    }
+
     public PlayCommand(PluginMinecraftDemo plugin) {
         this.plugin = plugin;
+    }
+
+    @Override
+    public List<String> onTabComplete(
+            CommandSender sender,
+            Command command,
+            String alias,
+            String[] args) {
+
+        if (args.length == 1) {
+            return List.of("par", "impar");
+        }
+
+        if (args.length == 2) {
+            return List.of("<numero>");
+        }
+
+        return Collections.emptyList();
     }
 
     @Override

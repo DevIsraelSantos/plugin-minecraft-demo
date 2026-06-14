@@ -10,6 +10,12 @@ public class PingCommand implements CommandExecutor {
 
     private final PluginMinecraftDemo plugin;
 
+    public static void register(PluginMinecraftDemo plugin) {
+        PingCommand command = new PingCommand(plugin);
+
+        plugin.getCommand("ping").setExecutor(command);
+    }
+
     public PingCommand(PluginMinecraftDemo plugin) {
         this.plugin = plugin;
     }

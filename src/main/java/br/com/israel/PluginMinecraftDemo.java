@@ -16,15 +16,25 @@ public class PluginMinecraftDemo extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
 
+        registerServices();
+        registerCommands();
+        registerListeners();
+
+        getLogger().info("Plugin iniciado!");
+    }
+
+    private void registerServices() {
         this.messageService = new MessageService(getConfig());
         this.parOuImparService = new ParOuImparService();
+    }
 
-        getLogger().info("Plugin iniciado! - ");
+    private void registerCommands() {
+        PingCommand.register(this);
+        PlayCommand.register(this);
+    }
 
-        getCommand("ping").setExecutor(new PingCommand(this));
-        getCommand("play").setExecutor(new PlayCommand(this));
-
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+    private void registerListeners() {
+        PlayerJoinListener.register(this);
     }
 
     @Override
