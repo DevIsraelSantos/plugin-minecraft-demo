@@ -5,8 +5,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import br.com.israel.PluginMinecraftDemo;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 
 public class PingCommand implements CommandExecutor {
 
@@ -23,9 +21,7 @@ public class PingCommand implements CommandExecutor {
             String label,
             String[] args) {
 
-        String message = plugin.getConfig().getString("ping-response", "Pong!");
-
-        sender.sendMessage(Component.text(message, NamedTextColor.GREEN));
+        sender.sendMessage(plugin.getMessageService().getPingMessage());
 
         return true;
     }

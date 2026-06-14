@@ -5,8 +5,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import br.com.israel.PluginMinecraftDemo;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 
 public class PlayerJoinListener implements Listener {
     private final PluginMinecraftDemo plugin;
@@ -17,9 +15,6 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        String message = plugin.getConfig().getString("welcome-message", "Bem vindo ao servidor!");
-
-        event.getPlayer().sendMessage(
-                Component.text(message, NamedTextColor.GREEN));
+        event.getPlayer().sendMessage(plugin.getMessageService().getWelcomeMessage());
     }
 }

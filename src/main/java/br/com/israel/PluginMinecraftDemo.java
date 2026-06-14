@@ -1,17 +1,20 @@
 package br.com.israel;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import br.com.israel.commands.PingCommand;
 import br.com.israel.listeners.PlayerJoinListener;
+import br.com.israel.services.MessageService;
 
 public class PluginMinecraftDemo extends JavaPlugin {
+    private MessageService messageService;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
+
+        messageService = new MessageService(
+                getConfig());
 
         getLogger().info("Plugin iniciado! - ");
 
@@ -25,13 +28,7 @@ public class PluginMinecraftDemo extends JavaPlugin {
         getLogger().info("Plugin desligado!");
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("ping")) {
-            sender.sendMessage("Pong!");
-            return true;
-        }
-
-        return false;
+    public MessageService getMessageService() {
+        return messageService;
     }
 }
