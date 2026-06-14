@@ -23,7 +23,7 @@ public class PingCommand implements CommandExecutor {
             String label,
             String[] args) {
 
-        String message = plugin.getConfig().getString("ping-response");
+        String message = plugin.getConfig().getString("ping-response", "Pong!");
 
         sender.sendMessage(Component.text(message, NamedTextColor.GREEN));
 

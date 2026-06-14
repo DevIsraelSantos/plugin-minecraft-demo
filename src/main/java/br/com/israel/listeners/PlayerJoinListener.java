@@ -17,7 +17,7 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        String message = plugin.getConfig().getString("welcome-message");
+        String message = plugin.getConfig().getString("welcome-message", "Bem vindo ao servidor!");
 
         event.getPlayer().sendMessage(
                 Component.text(message, NamedTextColor.GREEN));
