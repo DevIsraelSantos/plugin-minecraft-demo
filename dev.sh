@@ -13,9 +13,11 @@ set +a
 
 : "${SERVER_DIR:?SERVER_DIR não definida no .env}"
 : "${SERVER_JAR:?SERVER_JAR não definida no .env}"
+: "${PLUGIN_FOLDER_SERVER:?PLUGIN_FOLDER_SERVER não definida no .env}"
 
 echo "SERVER_DIR=$SERVER_DIR"
 echo "SERVER_JAR=$SERVER_JAR"
+echo "PLUGIN_FOLDER_SERVER=$PLUGIN_FOLDER_SERVER"
 
 echo
 echo "========================================"
@@ -30,6 +32,14 @@ if [ $? -ne 0 ]; then
     echo "ERRO NO BUILD"
     exit 1
 fi
+
+echo
+echo "========================================"
+echo " REMOVENDO CONFIG"
+echo "========================================"
+echo
+
+rm -f "$SERVER_DIR/plugins/$PLUGIN_FOLDER_SERVER/config.yml"
 
 echo
 echo "========================================"
