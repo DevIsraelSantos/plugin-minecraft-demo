@@ -7,3 +7,6 @@ author: Israel
 commands:
   ping:
     description: Teste do plugin
+
+  play:
+    description: Jogo de par ou ímpar

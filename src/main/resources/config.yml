@@ -1,2 +1,13 @@
 welcome-message: "Bem vindo ao servidor de teste!"
 ping-response: "Você foi pongado!"
+par-ou-impar-message: |
+  ══════════════════
+  Sua escolha: {choice}
+  Seu número: {player}
+  Número sorteado: {system}
+  Total: {total}
+
+  {result}
+  ══════════════════
+par-ou-impar-win: "Você ganhou!"
+par-ou-impar-lose: "Voce perdeu..."
