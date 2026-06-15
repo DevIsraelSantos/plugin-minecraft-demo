@@ -1,5 +1,6 @@
 plugins {
     java
+    id("com.gradleup.shadow") version "9.0.0"
 }
 
 group = "br.com.israel"
@@ -15,6 +16,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+    implementation("org.xerial:sqlite-jdbc:3.50.3.0")
 }
 
 java {
@@ -23,6 +25,10 @@ java {
     }
 }
 
-tasks.jar {
+tasks.build {
+    dependsOn(tasks.shadowJar)
+}
+
+tasks.shadowJar {
     archiveFileName.set("plugin-minecraft-demo.jar")
 }
