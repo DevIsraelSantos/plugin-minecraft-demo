@@ -11,3 +11,12 @@ par-ou-impar-message: |
   ══════════════════
 par-ou-impar-win: "Você ganhou!"
 par-ou-impar-lose: "Voce perdeu..."
+par-ou-impar-stats: |
+  ══════════════════
+
+  Partidas: {games}
+  Vitórias: {wins}
+  Derrotas: {losses}
+  Taxa de vitória: {percentage}
+
+  ══════════════════

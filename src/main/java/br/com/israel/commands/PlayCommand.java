@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import br.com.israel.PluginMinecraftDemo;
 import br.com.israel.models.ChoiceType;
 import br.com.israel.models.ParOuImparResult;
+import br.com.israel.models.PlayerStats;
 import net.kyori.adventure.text.Component;
 
 public class PlayCommand implements CommandExecutor, TabCompleter {
@@ -56,8 +57,7 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
 
         try {
             if (!(sender instanceof Player player)) {
-                sender.sendMessage(
-                        Component.text("Este comando só pode ser usado por jogadores."));
+                sender.sendMessage(Component.text("Este comando só pode ser usado por jogadores."));
                 return true;
             }
 
@@ -66,14 +66,11 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
             ChoiceType choice = parseChoice(args[0]);
             int value = Integer.parseInt(args[1]);
 
-            ParOuImparResult result = plugin
-                    .getParOuImparService()
-                    .play(choice, value);
+            ParOuImparResult result = plugin.getParOuImparService().play(choice, value);
+            PlayerStats stats = plugin.getPlayerStatsService().registerGame(player.getUniqueId(), result.won());
 
-            sender.sendMessage(
-                    plugin
-                            .getMessageService()
-                            .getParOuImparMessage(result));
+            sender.sendMessage(plugin.getMessageService().getParOuImparMessage(result));
+            sender.sendMessage(plugin.getMessageService().getPlayerStatsMessage(stats));
 
             if (result.won()) {
                 plugin.getEffectService().playWinEffect(player);
@@ -82,8 +79,7 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
             }
 
         } catch (IllegalArgumentException exception) {
-            sender.sendMessage(
-                    Component.text(exception.getMessage()));
+            sender.sendMessage(Component.text(exception.getMessage()));
         }
 
         return true;

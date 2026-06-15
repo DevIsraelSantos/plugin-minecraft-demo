@@ -3,6 +3,7 @@ package br.com.israel.services;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import br.com.israel.models.ParOuImparResult;
+import br.com.israel.models.PlayerStats;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
@@ -52,6 +53,32 @@ public class MessageService {
         return result.won()
                 ? green(message)
                 : red(message);
+    }
+
+    public Component getPlayerStatsMessage(PlayerStats stats) {
+        String message = config.getString("par-ou-impar-stats",
+                """
+                            ══════════════════
+                            Partidas: {games}
+                            Vitórias: {wins}
+                            Derrotas: {losses}
+                            Taxa de vitória: {percentage}
+
+                            ══════════════════
+                        """);
+
+        message = message.replace("{games}", stats.getGames().toString())
+                .replace("{wins}", stats.getWins().toString())
+                .replace("{losses}", stats.getLosses().toString())
+                .replace("{percentage}", stats.getPercentage());
+
+        return white(message);
+    }
+
+    private Component white(String message) {
+        return Component.text(
+                message,
+                NamedTextColor.WHITE);
     }
 
     private Component green(String message) {

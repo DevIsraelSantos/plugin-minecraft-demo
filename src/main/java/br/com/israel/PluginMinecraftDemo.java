@@ -8,11 +8,13 @@ import br.com.israel.listeners.PlayerJoinListener;
 import br.com.israel.services.EffectService;
 import br.com.israel.services.MessageService;
 import br.com.israel.services.ParOuImparService;
+import br.com.israel.services.PlayerStatsService;
 
 public class PluginMinecraftDemo extends JavaPlugin {
     private MessageService messageService;
     private ParOuImparService parOuImparService;
     private EffectService effectService;
+    private PlayerStatsService playerStatsService;
 
     @Override
     public void onEnable() {
@@ -29,6 +31,7 @@ public class PluginMinecraftDemo extends JavaPlugin {
         this.messageService = new MessageService(getConfig());
         this.parOuImparService = new ParOuImparService();
         this.effectService = new EffectService(getConfig(), this);
+        this.playerStatsService = new PlayerStatsService();
     }
 
     private void registerCommands() {
@@ -55,6 +58,10 @@ public class PluginMinecraftDemo extends JavaPlugin {
 
     public EffectService getEffectService() {
         return this.effectService;
+    }
+
+    public PlayerStatsService getPlayerStatsService() {
+        return this.playerStatsService;
     }
 
 }
