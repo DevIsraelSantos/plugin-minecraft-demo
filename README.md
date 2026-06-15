@@ -1,6 +1,88 @@
 # Projeto de Teste - Plugin Minecraft
 
-Este projeto tem como objetivo facilitar o desenvolvimento e os testes locais do plugin em um servidor Minecraft.
+Este projeto tem como objetivo facilitar o desenvolvimento e os testes locais de um plugin para Minecraft utilizando Paper.
+
+## Funcionalidades implementadas
+
+### `/ping`
+
+Comando simples para validar se o plugin está funcionando corretamente.
+
+**Exemplo:**
+
+```text
+/ping
+```
+
+**Resposta:**
+
+```text
+Pong!
+```
+
+---
+
+### `/play <par|impar> <numero>`
+
+Jogo de Par ou Ímpar.
+
+O jogador escolhe:
+
+- `par` ou `impar`
+- um número entre `1` e `10`
+
+O sistema sorteia um número aleatório entre `1` e `10`, soma com o valor informado e verifica se o resultado é par ou ímpar.
+
+Após a partida são exibidos:
+
+- Sua escolha
+- Seu número
+- Número sorteado pelo sistema
+- Total da soma
+- Resultado da partida
+- Estatísticas atualizadas
+
+**Exemplos:**
+
+```text
+/play par 5
+```
+
+```text
+/play impar 8
+```
+
+Além disso:
+
+- Vitória → efeitos visuais e sonoros
+- Derrota → efeito sonoro de falha
+
+---
+
+### `/stats`
+
+Exibe as estatísticas do jogador.
+
+**Exemplo:**
+
+```text
+/stats
+```
+
+**Saída:**
+
+```text
+══════════════════
+Partidas: 15
+Vitórias: 10
+Derrotas: 5
+Taxa de vitória: 66.67%
+══════════════════
+```
+
+As estatísticas são persistidas em banco SQLite e permanecem após reinicializações do servidor.
+
+---
 
 ## Pré-requisitos
 
