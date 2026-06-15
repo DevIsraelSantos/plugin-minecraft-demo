@@ -4,6 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import br.com.israel.commands.PingCommand;
 import br.com.israel.commands.PlayCommand;
+import br.com.israel.commands.StatsCommand;
 import br.com.israel.listeners.PlayerJoinListener;
 import br.com.israel.services.EffectService;
 import br.com.israel.services.MessageService;
@@ -37,6 +38,7 @@ public class PluginMinecraftDemo extends JavaPlugin {
     private void registerCommands() {
         PingCommand.register(this);
         PlayCommand.register(this);
+        StatsCommand.register(this);
     }
 
     private void registerListeners() {

@@ -10,3 +10,6 @@ commands:
 
   play:
     description: Jogo de par ou ímpar
+
+  stats:
+    description: Retorna o saldo do jogo de par ou impar
