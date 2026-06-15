@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import br.com.israel.PluginMinecraftDemo;
 import br.com.israel.helpers.CommandHelper;
+import br.com.israel.inventories.StatsInventory;
 import br.com.israel.models.PlayerStats;
 import net.kyori.adventure.text.Component;
 
@@ -34,16 +35,24 @@ public class ScoreboardCommand implements CommandExecutor {
         try {
             Player player = CommandHelper.getPlayer(sender);
 
+            PlayerStats stats = plugin
+                    .getPlayerStatsService()
+                    .getStats(player.getUniqueId());
+
+            if (args.length == 0) {
+                new StatsInventory().open(
+                        player,
+                        stats);
+
+                return true;
+            }
+
             if (args.length != 1) {
                 throw new IllegalArgumentException(
                         "Uso: /scoreboard <true|false>");
             }
 
             boolean enabled = Boolean.parseBoolean(args[0]);
-
-            PlayerStats stats = plugin
-                    .getPlayerStatsService()
-                    .getStats(player.getUniqueId());
 
             stats.setScoreboardEnabled(enabled);
 

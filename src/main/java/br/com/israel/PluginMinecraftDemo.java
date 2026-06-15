@@ -11,6 +11,7 @@ import br.com.israel.commands.ScoreboardCommand;
 import br.com.israel.commands.StatsCommand;
 import br.com.israel.listeners.BlockBreakListener;
 import br.com.israel.listeners.PlayerJoinListener;
+import br.com.israel.listeners.StatsInventoryListener;
 import br.com.israel.repositories.PlayerStatsRepository;
 import br.com.israel.services.DatabaseService;
 import br.com.israel.services.EffectService;
@@ -66,6 +67,7 @@ public class PluginMinecraftDemo extends JavaPlugin {
     private void registerListeners() {
         PlayerJoinListener.register(this);
         BlockBreakListener.register(this);
+        StatsInventoryListener.register(this);
     }
 
     @Override
