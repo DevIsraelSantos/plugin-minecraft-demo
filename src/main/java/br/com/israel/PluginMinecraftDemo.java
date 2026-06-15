@@ -43,7 +43,7 @@ public class PluginMinecraftDemo extends JavaPlugin {
             this.playerStatsRepository = new PlayerStatsRepository(this.databaseService);
             this.messageService = new MessageService(config);
             this.parOuImparService = new ParOuImparService();
-            this.effectService = new EffectService(config, this);
+            this.effectService = new EffectService(this);
             this.playerStatsService = new PlayerStatsService(this.playerStatsRepository);
 
         } catch (SQLException exception) {
