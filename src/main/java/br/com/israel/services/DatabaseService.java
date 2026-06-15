@@ -36,7 +36,9 @@ public class DatabaseService {
                 CREATE TABLE IF NOT EXISTS player_stats (
                     uuid TEXT PRIMARY KEY,
                     games INTEGER NOT NULL,
-                    wins INTEGER NOT NULL
+                    wins INTEGER NOT NULL,
+                    blocks_broken INTEGER NOT NULL DEFAULT 0,
+                    scoreboard_enabled INTEGER NOT NULL DEFAULT 1
                 )
                 """;
 

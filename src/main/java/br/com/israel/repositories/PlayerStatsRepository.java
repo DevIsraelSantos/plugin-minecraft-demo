@@ -19,7 +19,11 @@ public class PlayerStatsRepository {
     public PlayerStats findById(UUID playerId) throws SQLException {
 
         String sql = """
-                SELECT games, wins
+                SELECT
+                    games,
+                    wins,
+                    blocks_broken,
+                    scoreboard_enabled
                 FROM player_stats
                 WHERE uuid = ?
                 """;
@@ -33,12 +37,14 @@ public class PlayerStatsRepository {
         ResultSet result = statement.executeQuery();
 
         if (!result.next()) {
-            return new PlayerStats(0, 0);
+            return new PlayerStats(0, 0, 0, true);
         }
 
         return new PlayerStats(
                 result.getInt("games"),
-                result.getInt("wins"));
+                result.getInt("wins"),
+                result.getInt("blocks_broken"),
+                result.getInt("scoreboard_enabled") == 1);
     }
 
     public void save(
@@ -50,13 +56,17 @@ public class PlayerStatsRepository {
                 INSERT INTO player_stats (
                     uuid,
                     games,
-                    wins
+                    wins,
+                    blocks_broken,
+                    scoreboard_enabled
                 )
-                VALUES (?, ?, ?)
+                VALUES (?, ?, ?, ?, ?)
                 ON CONFLICT(uuid)
                 DO UPDATE SET
                     games = excluded.games,
-                    wins = excluded.wins
+                    wins = excluded.wins,
+                    blocks_broken = excluded.blocks_broken,
+                    scoreboard_enabled = excluded.scoreboard_enabled
                 """;
 
         PreparedStatement statement = databaseService
@@ -66,6 +76,8 @@ public class PlayerStatsRepository {
         statement.setString(1, playerId.toString());
         statement.setInt(2, stats.getGames());
         statement.setInt(3, stats.getWins());
+        statement.setInt(4, stats.getBlocksBroken());
+        statement.setInt(5, stats.isScoreboardEnabled() ? 1 : 0);
 
         statement.executeUpdate();
     }

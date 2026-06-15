@@ -13,3 +13,6 @@ commands:
 
   stats:
     description: Retorna o saldo do jogo de par ou impar
+
+  scoreboard:
+    description: Ativa ou desativa o scoreboard

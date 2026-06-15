@@ -39,4 +39,30 @@ public class PlayerStatsService {
             throw new RuntimeException("Falha ao buscar estatísticas do jogador", exception);
         }
     }
+
+    public PlayerStats incrementBlocks(
+            UUID playerId) {
+        try {
+            PlayerStats stats = repository.findById(playerId);
+
+            stats.addBlockBroken();
+
+            repository.save(playerId, stats);
+
+            return stats;
+        } catch (SQLException exception) {
+            throw new RuntimeException("Falha ao atualizar blobk do jogador", exception);
+        }
+    }
+
+    public void save(UUID playerId, PlayerStats stats) {
+
+        try {
+            repository.save(playerId, stats);
+        } catch (SQLException exception) {
+            throw new RuntimeException(
+                    "Falha ao salvar estatísticas do jogador",
+                    exception);
+        }
+    }
 }

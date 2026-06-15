@@ -3,12 +3,19 @@ package br.com.israel.models;
 public class PlayerStats {
     private Integer games;
     private Integer wins;
+    private Integer blocksBroken;
+    private Boolean scoreboardEnabled;
 
     public PlayerStats(
             Integer games,
-            Integer wins) {
+            Integer wins,
+            Integer blocksBroken,
+            Boolean scoreboardEnabled) {
+
         this.games = games;
         this.wins = wins;
+        this.blocksBroken = blocksBroken;
+        this.scoreboardEnabled = scoreboardEnabled;
     }
 
     private void addGame() {
@@ -22,6 +29,14 @@ public class PlayerStats {
 
     public void addDefeat() {
         this.addGame();
+    }
+
+    public void addBlockBroken() {
+        this.blocksBroken++;
+    }
+
+    public Integer getBlocksBroken() {
+        return blocksBroken;
     }
 
     public Integer getGames() {
@@ -44,6 +59,14 @@ public class PlayerStats {
         double value = (double) this.wins * 100 / this.games;
 
         return String.format("%.2f%%", value);
+    }
+
+    public void setScoreboardEnabled(Boolean scoreboardEnabled) {
+        this.scoreboardEnabled = scoreboardEnabled;
+    }
+
+    public Boolean isScoreboardEnabled() {
+        return scoreboardEnabled;
     }
 
 }
