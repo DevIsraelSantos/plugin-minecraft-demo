@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import br.com.israel.PluginMinecraftDemo;
+import br.com.israel.helpers.CommandHelper;
 import br.com.israel.models.PlayerStats;
 import net.kyori.adventure.text.Component;
 
@@ -28,16 +29,16 @@ public class StatsCommand implements CommandExecutor {
             Command command,
             String label,
             String[] args) {
+        try {
+            Player player = CommandHelper.getPlayer(sender);
+            PlayerStats stats = plugin.getPlayerStatsService().getStats(player.getUniqueId());
 
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(Component.text("Este comando só pode ser usado por jogadores."));
+            sender.sendMessage(plugin.getMessageService().getPlayerStatsMessage(stats));
+
+            return true;
+        } catch (IllegalArgumentException exception) {
+            sender.sendMessage(Component.text(exception.getMessage()));
             return true;
         }
-
-        PlayerStats stats = plugin.getPlayerStatsService().getStats(player.getUniqueId());
-
-        sender.sendMessage(plugin.getMessageService().getPlayerStatsMessage(stats));
-
-        return true;
     }
 }

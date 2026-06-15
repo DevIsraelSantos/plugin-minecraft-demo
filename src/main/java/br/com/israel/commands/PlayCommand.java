@@ -10,6 +10,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import br.com.israel.PluginMinecraftDemo;
+import br.com.israel.helpers.CommandHelper;
 import br.com.israel.models.ChoiceType;
 import br.com.israel.models.ParOuImparResult;
 import br.com.israel.models.PlayerStats;
@@ -56,10 +57,7 @@ public class PlayCommand implements CommandExecutor, TabCompleter {
             String[] args) {
 
         try {
-            if (!(sender instanceof Player player)) {
-                sender.sendMessage(Component.text("Este comando só pode ser usado por jogadores."));
-                return true;
-            }
+            Player player = CommandHelper.getPlayer(sender);
 
             validate(args);
 
